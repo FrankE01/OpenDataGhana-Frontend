@@ -1,4 +1,4 @@
-import { Table, Trophy } from "lucide-react";
+import { Table, SquareStack } from "lucide-react";
 
 import {
   Sidebar,
@@ -13,6 +13,7 @@ import {
 import NavBrand from "./nav-brand";
 import SidebarTrigger from "./sidebar-trigger";
 import NavSearch from "./nav-search";
+import Link from "next/link";
 
 export function AppSidebar() {
   return (
@@ -36,18 +37,18 @@ export function AppSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem key="Datasets">
                 <SidebarMenuButton asChild>
-                  <a href="/#">
+                  <Link href="/datasets">
                     <Table />
-                    <span>Datasets</span>
-                  </a>
+                    Datasets
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              <SidebarMenuItem key="Showcases">
+              <SidebarMenuItem key="Categories">
                 <SidebarMenuButton asChild>
-                  <a href="/#">
-                    <Trophy />
-                    <span>Showcases</span>
-                  </a>
+                  <Link href="/categories">
+                    <SquareStack />
+                    Categories
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>

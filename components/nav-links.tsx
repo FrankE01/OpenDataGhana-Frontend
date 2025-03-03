@@ -3,16 +3,17 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+import Link from "next/link";
 
 const NavLinks = () => {
   return (
     <NavigationMenu className="space-x-4 hidden md:block">
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavLink>Datasets</NavLink>
+          <NavLink href="/datasets">Datasets</NavLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavLink>Showcases</NavLink>
+          <NavLink href="/categories">Categories</NavLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
@@ -21,6 +22,10 @@ const NavLinks = () => {
 
 export default NavLinks;
 
-const NavLink = ({ children }: { children: string }) => {
-  return <div className="px-4">{children}</div>;
+const NavLink = ({ children, href }: { children: string; href: string }) => {
+  return (
+    <Link href={href} className="px-4">
+      {children}
+    </Link>
+  );
 };

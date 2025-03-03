@@ -1,29 +1,55 @@
+import { SquareStack } from "lucide-react";
 import { SectionHeading, SectionParagraph } from "./texts";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { useMemo } from "react";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 const PopularCategoriesSection = () => {
-  return (
-    <section className="grid grid-cols-1 sm:grid-cols-2 gap-12 p-4">
-      <div className="flex flex-col justify-end">
-        <SectionHeading>Join Ghana&apos;s Data Revolution</SectionHeading>
-        <SectionParagraph>
-          We believe that every contribution counts in building a future where
-          data drives real-world solutions. At Open Data Ghana, we may be a
-          small team, but we&apos;re committed to curating and reviewing the
-          best datasets for our community. Together, with your help, we&apos;re
-          creating a valuable resource for users.
-        </SectionParagraph>
-        <SectionParagraph>
-          Here&apos;s a snapshot of what we&apos;ve achieved so far.
-        </SectionParagraph>
+  const popular_categories = useMemo(() => {
+    return [
+      { title: "Health", description: "Health datasets" },
+      { title: "Education", description: "Education datasets" },
+      { title: "Agriculture", description: "Agriculture datasets" },
+      { title: "Finance", description: "Finance datasets" },
+      { title: "Transport", description: "Transport datasets" },
+      { title: "Energy", description: "Energy datasets" },
+      { title: "Environment", description: "Environment datasets" },
+      { title: "Tourism", description: "Tourism datasets" },
+      { title: "Demographics", description: "Demographics datasets" },
+      { title: "Security", description: "Security datasets" },
+    ];
+  }, []);
 
-        <div className="grid grid-cols-3 gap-4">
-          <Stat text="Access to" data_point="Datasets" value={0} />
-          <Stat text="From" data_point="Sources" value={0} />
-          <Stat text="Across" data_point="Categories" value={0} />
+  return (
+    <section className="p-4">
+      <div>
+        <div className="flex space-x-2 items-center">
+          <SquareStack />
+          <SectionHeading>Popular Categories</SectionHeading>
         </div>
+        <SectionParagraph>
+          Explore the most popular categories of datasets on Open Data Ghana.
+        </SectionParagraph>
       </div>
-      <div className="flex items-center justify-center h-full w-full bg-gray-400">
-        IMAGE HERE
+      <div className="max-w-[90vw] relative">
+        <ScrollArea className="w-full sm:w-full">
+          <div className="flex space-x-4">
+            {popular_categories.map((category, index) => (
+              <CategoryCard
+                key={index}
+                title={category.title}
+                description={category.description}
+              />
+            ))}
+          </div>
+
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
       </div>
     </section>
   );
@@ -31,22 +57,19 @@ const PopularCategoriesSection = () => {
 
 export default PopularCategoriesSection;
 
-const Stat = ({
-  text,
-  data_point,
-  value,
+const CategoryCard = ({
+  title,
+  description,
 }: {
-  text: string;
-  data_point: string;
-  value: number;
+  title: string;
+  description: string;
 }) => {
   return (
-    <div className="mx-auto text-center">
-      <div className="font-geist text-primary">{text}</div>
-      <div className="font-bold text-xl text-mainBrown dark:text-mainBlue">
-        &gt; {value / 1000} K
-      </div>
-      <div className="uppercase text-gray-400">{data_point}</div>
-    </div>
+    <Card className="min-w-[282px] max-w-[282px]">
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
+      </CardHeader>
+    </Card>
   );
 };
